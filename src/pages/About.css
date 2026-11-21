@@ -1,0 +1,236 @@
+/* ===== About Hero ===== */
+.about-hero {
+  position: relative;
+  padding: 4.5rem 0 4.75rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 72%);
+}
+
+.about-hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.about-hero__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 4.4vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+.about-hero__subtitle {
+  font-size: 1.08rem;
+  color: var(--muted);
+  max-width: 36rem;
+  line-height: 1.7;
+}
+
+.about-visual-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.about-visual-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.about-visual-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--primary-light), var(--navy-soft));
+  flex-shrink: 0;
+}
+
+.about-visual-card__header p {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+}
+
+.about-visual-card__header h3 {
+  font-family: var(--font-display);
+  color: var(--navy);
+  font-size: 1.1rem;
+}
+
+.about-visual-card__rows {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.about-visual-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.95rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #fcfdff;
+  color: var(--primary);
+}
+
+.about-visual-row strong {
+  display: block;
+  color: var(--navy);
+  font-size: 0.95rem;
+  margin-bottom: 0.15rem;
+}
+
+.about-visual-row span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+/* ===== Our Story ===== */
+.about-story {
+  padding-top: 3.5rem;
+}
+
+.about-story__layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.about-story__panel {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.about-story__panel p {
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+/* ===== Mission & Vision ===== */
+.about-mission {
+  background: var(--bg);
+}
+
+.about-mission__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.about-mission__card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.about-mission__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: #bfdbfe;
+}
+
+.about-mission__card h3 {
+  font-family: var(--font-display);
+  color: var(--navy);
+  font-size: 1.2rem;
+  margin-bottom: 0.65rem;
+}
+
+.about-mission__card p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ===== Workflow ===== */
+.about-workflow__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+/* ===== Why Choose ===== */
+.why__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (min-width: 1025px) {
+  .why__grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .why__grid .feature-card {
+    grid-column: span 2;
+  }
+
+  .why__grid .feature-card:nth-child(4) {
+    grid-column: 2 / 4;
+  }
+
+  .why__grid .feature-card:nth-child(5) {
+    grid-column: 4 / 6;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .about-hero__grid,
+  .about-story__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-workflow__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .why__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .why__grid .feature-card,
+  .why__grid .feature-card:nth-child(4),
+  .why__grid .feature-card:nth-child(5) {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-hero {
+    padding: 2.5rem 0 3rem;
+  }
+
+  .about-mission__grid,
+  .about-workflow__grid,
+  .why__grid {
+    grid-template-columns: 1fr;
+  }
+}
