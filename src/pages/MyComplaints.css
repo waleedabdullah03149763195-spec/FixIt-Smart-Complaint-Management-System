@@ -1,0 +1,569 @@
+/* ==========================================================================
+   My Complaints Page Styles
+   FixIt – Smart Complaint & Maintenance Management System
+   ========================================================================== */
+
+.mycomplaints-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--slate);
+  position: relative;
+}
+
+/* ==========================================================================
+   Main Content Area
+   ========================================================================== */
+
+.mycomplaints-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header bar styling */
+.mycomplaints-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.mycomplaints-content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Page Intro */
+.mycomplaints-intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mycomplaints-intro h1 {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.35rem;
+}
+
+.mycomplaints-intro p {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.mycomplaints-intro-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ==========================================================================
+   Filter & Controls Card
+   ========================================================================== */
+
+.complaints-filter-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.35rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+/* Search Row */
+.filter-search-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.search-box-large {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.search-box-large__icon {
+  position: absolute;
+  left: 1rem;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.search-box-large input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 2.75rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: #f8fafc;
+  font-size: 0.92rem;
+  color: var(--slate);
+  transition: all 0.2s ease;
+}
+
+.search-box-large input:focus {
+  outline: none;
+  background: var(--white);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 0.75rem;
+  padding: 0.25rem;
+  border-radius: 6px;
+  color: #94a3b8;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.search-clear-btn:hover {
+  color: var(--navy);
+  background: #f1f5f9;
+}
+
+/* Filter Dropdowns Grid */
+.filter-dropdowns-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.filter-select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.filter-select-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.filter-select-group select {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 0.55rem 2rem 0.55rem 0.75rem;
+  font: inherit;
+  font-size: 0.86rem;
+  color: var(--slate);
+  background: #fcfdff;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  transition: all 0.2s ease;
+}
+
+.filter-select-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.clear-filters-btn {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 10px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fee2e2;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  height: 38px;
+}
+
+.clear-filters-btn:hover {
+  background: #fee2e2;
+}
+
+/* Filter Summary Bar */
+.filter-summary-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.85rem;
+  border-top: 1px solid #f1f5f9;
+  font-size: 0.85rem;
+  color: var(--muted);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.active-filter-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--primary-soft);
+  color: var(--primary);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid #dbeafe;
+}
+
+.filter-tag-remove {
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+}
+
+.filter-tag-remove:hover {
+  color: #1d4ed8;
+}
+
+/* ==========================================================================
+   Complaints Table View
+   ========================================================================== */
+
+.complaints-table-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.complaints-table-desktop {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.complaints-table-desktop th {
+  background: #f8fafc;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.95rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.complaints-table-desktop td {
+  padding: 1.05rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.complaints-table-desktop tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.complaints-table-desktop tbody tr:hover {
+  background-color: #f8fbff;
+}
+
+.complaints-table-desktop tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Status Badges Including Rejected */
+.status-badge--rejected {
+  background: #ffe4e6;
+  color: #be123c;
+  border: 1px solid #fecdd3;
+}
+
+/* Priority Indicators */
+.priority-badge--urgent {
+  color: #dc2626;
+  font-weight: 700;
+}
+.priority-badge--urgent .priority-dot {
+  background: #dc2626;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25);
+}
+
+/* Mobile Cards View */
+.complaints-mobile-cards {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.complaint-mobile-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.mobile-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.mobile-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.35;
+}
+
+.mobile-card-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+.mobile-card-details div span {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.mobile-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+/* Empty State */
+.complaints-empty-state {
+  padding: 4rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.empty-state-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: var(--muted);
+  display: grid;
+  place-items: center;
+}
+
+.complaints-empty-state h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.complaints-empty-state p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  max-width: 420px;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Pagination Controls
+   ========================================================================== */
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.5rem;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  font-size: 0.86rem;
+  color: var(--muted);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pagination-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.page-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--slate);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.page-nav-btn:hover:not(:disabled) {
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.page-nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-num-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--slate);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.page-num-btn:hover {
+  background: #f1f5f9;
+}
+
+.page-num-btn--active {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+.page-num-btn--active:hover {
+  background: var(--primary-dark);
+}
+
+/* ==========================================================================
+   Modal Dialog Enhancements for Rejection Notice
+   ========================================================================== */
+
+.modal-rejection-callout {
+  background: #fff1f2;
+  border: 1.5px solid #fecdd3;
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  color: #9f1239;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.modal-rejection-callout strong {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  color: #881337;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 1080px) {
+  .filter-dropdowns-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .clear-filters-btn {
+    grid-column: 1 / -1;
+    width: fit-content;
+  }
+}
+
+@media (max-width: 820px) {
+  .complaints-table-desktop {
+    display: none;
+  }
+
+  .complaints-mobile-cards {
+    display: flex;
+  }
+
+  .complaints-table-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .pagination-container {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .mycomplaints-header {
+    padding: 0.85rem 1.25rem;
+  }
+
+  .mycomplaints-content {
+    padding: 1.25rem;
+  }
+
+  .filter-dropdowns-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pagination-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}

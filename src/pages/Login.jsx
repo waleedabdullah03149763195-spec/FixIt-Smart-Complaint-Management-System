@@ -1,36 +1,73 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   AlertCircle,
+  ArrowRight,
+  CheckCircle2,
   ClipboardList,
   Eye,
   EyeOff,
   Lock,
   Mail,
+  Shield,
+  Sparkles,
+  User,
   Wrench,
 } from 'lucide-react'
 import { loginWithDemo } from '../services/authDemo'
 import './Login.css'
 
 const initialValues = {
-  email: '',
-  password: '',
-  rememberMe: false,
+  email: 'alex.morgan@campus.edu',
+  password: 'password123',
+  rememberMe: true,
 }
 
 function Login() {
+  const navigate = useNavigate()
+  const [selectedRole, setSelectedRole] = useState('user')
   const [values, setValues] = useState(initialValues)
   const [errors, setErrors] = useState({})
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [feedback, setFeedback] = useState(null)
 
+  const selectRole = (role) => {
+    setSelectedRole(role)
+    if (role === 'admin') {
+      setValues({
+        email: 'admin.ops@campus-facilities.edu',
+        password: 'password123',
+        rememberMe: true,
+      })
+    } else {
+      setValues({
+        email: 'alex.morgan@campus.edu',
+        password: 'password123',
+        rememberMe: true,
+      })
+    }
+    setErrors({})
+    setFeedback(null)
+  }
+
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target
+    const nextVal = type === 'checkbox' ? checked : value
     setValues((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: nextVal,
     }))
+
+    // Auto-detect admin role if email contains "admin"
+    if (name === 'email' && typeof nextVal === 'string') {
+      if (nextVal.toLowerCase().includes('admin')) {
+        setSelectedRole('admin')
+      } else {
+        setSelectedRole('user')
+      }
+    }
+
     setErrors((prev) => ({ ...prev, [name]: '' }))
     setFeedback(null)
   }
@@ -65,18 +102,21 @@ function Login() {
     setErrors({})
 
     try {
-      // Structured demo login call — swap for a real API later.
       const result = await loginWithDemo({
         email: values.email.trim(),
         password: values.password,
         rememberMe: values.rememberMe,
+        role: selectedRole,
       })
 
-      if (!result.success) {
+      if (result.success) {
+        // Navigate immediately — no setTimeout so React Strict Mode can't cancel it
+        navigate(result.redirectTo, { replace: true })
+      } else {
         setFeedback({
-          type: 'info',
-          title: 'Demo login only',
-          message: result.message,
+          type: 'error',
+          title: 'Sign In Failed',
+          message: result.message || 'Unable to sign in. Please try again.',
         })
       }
     } catch {
@@ -145,13 +185,52 @@ function Login() {
             <p>Enter your details to continue to your account.</p>
           </div>
 
+          <div className="login-demo-roles" aria-label="Demo role selector">
+            <div className="login-demo-roles__title">
+              <span>
+                <Sparkles size={14} style={{ verticalAlign: 'middle', marginRight: 4 }} />
+                Quick Demo Accounts:
+              </span>
+              <small>Click to switch role</small>
+            </div>
+            <div className="login-demo-roles__grid">
+              <button
+                type="button"
+                className={`login-demo-btn ${selectedRole === 'user' ? 'login-demo-btn--active' : ''}`}
+                onClick={() => selectRole('user')}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <User size={15} />
+                  <strong>Student / User</strong>
+                </div>
+                <span>alex.morgan@campus.edu</span>
+              </button>
+
+              <button
+                type="button"
+                className={`login-demo-btn ${selectedRole === 'admin' ? 'login-demo-btn--active' : ''}`}
+                onClick={() => selectRole('admin')}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Shield size={15} />
+                  <strong>Administrator</strong>
+                </div>
+                <span>admin.ops@campus-facilities.edu</span>
+              </button>
+            </div>
+          </div>
+
           <form className="login-form" onSubmit={handleSubmit} noValidate>
             {feedback && (
               <div
                 className={`login-alert login-alert--${feedback.type}`}
                 role="status"
               >
-                <AlertCircle size={18} />
+                {feedback.type === 'success' ? (
+                  <CheckCircle2 size={18} />
+                ) : (
+                  <AlertCircle size={18} />
+                )}
                 <div>
                   <strong>{feedback.title}</strong>
                   <p>{feedback.message}</p>
@@ -234,7 +313,14 @@ function Login() {
               className="btn btn-primary btn-lg login-submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Checking...' : 'Login'}
+              {isSubmitting ? (
+                'Signing In...'
+              ) : (
+                <>
+                  <span>Sign In to {selectedRole === 'admin' ? 'Admin' : 'User'} Dashboard</span>
+                  <ArrowRight size={18} style={{ marginLeft: 6 }} />
+                </>
+              )}
             </button>
           </form>
 
